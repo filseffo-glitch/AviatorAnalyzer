@@ -1,0 +1,76 @@
+utilise : actions/setup-java@v6.0.1
+  avec:
+    # Version Java à configurer. Accepte une version Java complète ou semver, ou l'alias « latest » pour utiliser la dernière version stable disponible. Consultez les exemples de syntaxe prise en charge dans le fichier README.
+    java-version : # optionnel
+    # Chemin d'accès à un fichier contenant la version de Java à configurer (.java-version, .tool-versions, .sdkmanrc). Utilisé lorsque la version de Java n'est pas définie. Consultez les exemples de syntaxe prise en charge dans le fichier README.
+    fichier de version Java : # optionnel
+    # Distribution Java. Consultez la liste des distributions prises en charge dans le fichier README. Cette information est obligatoire sauf si java-version-file pointe vers un fichier .sdkmanrc avec un suffixe de distribution reconnu (par exemple, java=21.0.5-tem).
+    distribution : # optionnel
+    # Le type de paquet (`jdk`, `jre`, `jdk+fx`, `jre+fx`, `jdk+crac`, `jre+crac`, `jdk+jmods`, `jdk+jcef`, `jre+jcef`, `jdk+ft` ou `jre+ft`). Les valeurs prises en charge varient selon la distribution.
+    java-package : # facultatif, par défaut jdk
+    # Architecture du paquet (`x86`, `x64`, `armv7`, `aarch64`, `ppc64le`, `ppc64` ou `s390x`). Les alias `ia32`, `amd64`, `arm` et `arm64` sont normalisés en `x86`, `x64`, `armv7` et `aarch64`. Les valeurs prises en charge varient selon la distribution et le système d'exploitation. Par défaut, l'architecture utilisée est celle du lanceur d'actions.
+    architecture : # optionnel
+    # Chemin d'accès à l'emplacement du JDK compressé
+    fichier jdk : # optionnel
+    # Alias ​​obsolète pour `jdk-file`. Chemin d'accès au JDK compressé. Utilisez plutôt `jdk-file` ; cet alias pourra être supprimé dans une version ultérieure.
+    jdkFile : # optionnel
+    # Activez cette option si vous souhaitez que l'action vérifie la disponibilité de la dernière version conforme aux spécifications de version.
+    vérifier-dernières : # optionnel
+    # Activez cette option pour toujours télécharger Java et remplacer toute version correspondante dans le cache de l'outil
+    téléchargement forcé : # optionnel
+    # Définissez cette option sur false si vous souhaitez installer un JDK sans en faire le JDK par défaut. Si cette option est désactivée, les variables d'environnement JAVA_HOME et PATH ne sont pas mises à jour, mais la variable JAVA_HOME_<major>_<arch> est conservée.
+    set-default : # facultatif, la valeur par défaut est vrai
+    # Vérifier les signatures des packages Java téléchargés lorsque la distribution sélectionnée les prend en charge. Si cette option est omise, des avertissements sont générés en cas d'échec. L'activation explicite de cette option force la vérification et rend les échecs irréversibles, y compris ceux causés par une rotation inattendue de la clé de signature du fournisseur.
+    vérifier-signature : # optionnel
+    Une ou plusieurs clés publiques GPG chiffrées en ASCII sont utilisées pour vérifier les signatures des paquets téléchargés. Plusieurs blocs de clés chiffrées sont concaténés. Les clés personnalisées remplacent les clés fournies avec la distribution sélectionnée.
+    vérifier-signature-clé-publique : # optionnel
+    # ID du dépôt distributionManagement dans le fichier pom.xml. Par défaut : `github`
+    server-id : # facultatif, par défaut github
+    # Nom de la variable d'environnement pour le nom d'utilisateur permettant l'authentification auprès du dépôt Apache Maven. La valeur par défaut est $GITHUB_ACTOR
+    server-username-env-var : # facultatif
+    # Alias ​​obsolète pour server-username-env-var
+    nom d'utilisateur du serveur : # facultatif
+    # Nom de la variable d'environnement pour le mot de passe ou le jeton d'authentification auprès du dépôt Apache Maven. Par défaut : $GITHUB_TOKEN
+    server-password-env-var: # optionnel
+    # Alias ​​obsolète pour server-password-env-var
+    mot de passe du serveur : # facultatif
+    # Liste multiligne des identifiants du serveur Maven au format `server-id:USERNAME_ENV:PASSWORD_ENV`. Lorsqu'elle est définie, elle remplace le serveur unique configuré par server-id, server-username-env-var et server-password-env-var.
+    mvn-server-credentials : # facultatif
+    # Liste multiligne des dépôts de dépendances Maven au format `repository-id:repository-url:snapshots-enabled`.
+    mvn-repositories : # optionnel
+    # Inclure Maven Central dans le profil des dépôts de dépendances généré. Si la valeur est false, Central est désactivé sauf si un dépôt explicite avec l'ID `central` est déclaré.
+    mvn-repositories-include-central : # optionnel, la valeur par défaut est vrai
+    # Placer Maven Central avant les dépôts de dépendances personnalisés. Sans effet si Maven Central est exclu.
+    mvn-repositories-prioritize-central : # optionnel, la valeur par défaut est vrai
+    # Chemin d'accès où le fichier settings.xml sera écrit. Par défaut : ~/.m2.
+    chemin des paramètres : # optionnel
+    # Remplacer le fichier settings.xml s'il existe. La valeur par défaut est « true ».
+    overwrite-settings : # facultatif, la valeur par défaut est vrai
+    # Clé privée GPG à importer dans un trousseau de clés temporaire isolé. Par défaut : chaîne vide.
+    gpg-private-key : # facultatif, la valeur par défaut est
+    # Nom de la variable d'environnement pour la phrase secrète de la clé privée GPG. Par défaut, elle prend la valeur GPG_PASSPHRASE lorsque gpg-private-key est défini.
+    gpg-passphrase-env-var : # optionnel
+    # Alias ​​obsolète pour gpg-passphrase-env-var
+    phrase de passe GPG : # optionnel
+    # Nom de la plateforme de construction pour mettre en cache les dépendances. Il peut s'agir de « maven », « gradle » ou « sbt ».
+    cache : # optionnel
+    # Mise en cache des installations JDK téléchargées entre les tâches. Activée par défaut lorsque la mise en cache des dépendances est configurée avec `cache` ; définissez explicitement sur « true » ou « false » pour la désactiver.
+    cache-jdk : # optionnel
+    # Chemin d'accès à un fichier de dépendance : pom.xml, build.gradle, build.sbt, etc. Cette option peut être utilisée avec l'option `cache`. Si elle est omise, la recherche du fichier de dépendance s'effectue dans l'ensemble du dépôt. Cette option prend en charge les caractères génériques et une liste de noms de fichiers pour la mise en cache de plusieurs dépendances.
+    cache-dependency-path : # optionnel
+    # Chemin d'accès au cache, différent du chemin par défaut du cache de dépendances du gestionnaire de paquets sélectionné. Cette option peut être utilisée avec l'option `cache` et prend en charge une liste de chemins et de modèles d'exclusion.
+    chemin du cache : # optionnel
+    # Restaurez les caches sans enregistrer les modifications apportées au cache dans l'action post.
+    cache-read-only : # optionnel
+    # Solution de contournement pour transmettre l'état de la tâche à l'étape de post-tâche. Cette variable n'est pas destinée à être paramétrée manuellement.
+    job-status : # facultatif, la valeur par défaut est ${{ job.status }}
+    # Jeton utilisé pour l'authentification lors de la récupération des manifestes de version hébergés sur github.com, comme par exemple pour la version Microsoft d'OpenJDK. Sur github.com, la valeur par défaut est suffisante. Sur GHES, vous pouvez fournir un jeton d'accès personnel pour github.com en cas de limitation de débit.
+    token: # facultatif, la valeur par défaut est ${{ github.server_url == 'https://github.com' && github.token || '' }}
+    # Nom de l'identifiant de la chaîne d'outils Maven si le nom par défaut « ${mvn-toolchain-vendor}_${java-version} » n'est pas souhaité. Le fournisseur de la chaîne d'outils utilise par défaut la valeur de « distribution ». Le nombre d'identifiants doit correspondre au nombre de versions de Java. Consultez les exemples de syntaxe prise en charge dans le fichier d'utilisation avancée.
+    mvn-toolchain-id : # optionnel
+    # Nom du fournisseur de la chaîne d'outils Maven si le nom par défaut « ${distribution} » n'est pas souhaité. Consultez les exemples de syntaxe prise en charge dans le fichier d'utilisation avancée.
+    mvn-toolchain-vendor : # optionnel
+    # Indique si Maven doit consigner la progression du téléchargement/transfert des artefacts dans le journal de compilation. Si la valeur est « false » (par défaut), l'action active l'option « -ntp » (--no-transfer-progress) dans MAVEN_ARGS pour des journaux plus clairs. Définissez cette valeur sur « true » pour conserver l'affichage de la progression. Sans effet sur les compilations non Maven.
+    afficher-progression-téléchargement : # optionnel
+    # Indique s'il faut enregistrer le module de détection des problèmes Java (erreurs/avertissements du compilateur et exceptions non gérées). Définir sur « false » pour désactiver les annotations.
+    problem-matcher : # optionnel, la valeur par 
